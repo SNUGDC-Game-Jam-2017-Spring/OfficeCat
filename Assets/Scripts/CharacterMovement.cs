@@ -34,9 +34,10 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	public void LookAround()
 	{
+		head.DOKill();
 		var rot = head.localRotation.eulerAngles;
-		var currntRotation = rot.y;
-		if(Mathf.Abs(currntRotation) > maxHeadRotation)
+		var currntRotation = -Mathf.DeltaAngle(rot.y,0);
+		if(currntRotation * LookAroundDirection > maxHeadRotation)
 		{
 			currntRotation = maxHeadRotation * LookAroundDirection;
 			LookAroundDirection *= -1;
