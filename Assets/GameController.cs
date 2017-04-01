@@ -7,6 +7,7 @@ public static class Level
 {
     public static int currentWork = 0;
     public static int currentWorkToDo = 15;
+    public static int WarningCount = 0;
 }
 
 public class GameController : MonoBehaviour {
