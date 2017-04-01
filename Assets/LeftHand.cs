@@ -32,5 +32,9 @@ public class LeftHand : MonoBehaviour {
                 isStampReady = false;
             }
         }
+        else if(other.tag == "stamp")
+        {
+            isStampReady = true;
+        }
     }
 }
