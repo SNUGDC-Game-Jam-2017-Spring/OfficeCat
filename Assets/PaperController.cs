@@ -28,7 +28,10 @@ public class PaperController : MonoBehaviour {
     {
         if(other.GetComponent<LeftHand>() != null)
         {
-            other.GetComponent<LeftHand>().isStampReady = false;
+            LeftHand leftHand = other.GetComponent<LeftHand>();
+            leftHand.isStampReady = false;
+            leftHand.catPaw[0].enabled = true;
+            leftHand.catPaw[1].enabled = false;
         }
     }
 }
