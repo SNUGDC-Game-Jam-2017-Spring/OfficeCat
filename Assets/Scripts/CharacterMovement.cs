@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 
 public class CharacterMovement : MonoBehaviour {
@@ -40,6 +38,7 @@ public class CharacterMovement : MonoBehaviour {
 		var currntRotation = rot.y;
 		if(Mathf.Abs(currntRotation) > maxHeadRotation)
 		{
+			currntRotation = maxHeadRotation * LookAroundDirection;
 			LookAroundDirection *= -1;
 		}
 		currntRotation += headRotationSpeed * Time.deltaTime * LookAroundDirection;
