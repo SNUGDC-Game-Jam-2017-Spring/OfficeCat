@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PaperController : MonoBehaviour {
-
+    
     Rigidbody rb;
 
 	void Start () {
@@ -12,7 +12,6 @@ public class PaperController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
     private void OnCollisionStay(Collision collision)
@@ -21,7 +20,15 @@ public class PaperController : MonoBehaviour {
         if (trackedObj != null)
         {
             var device = SteamVR_Controller.Input((int)trackedObj.index);
-            rb.velocity = -(device.velocity - collision.contacts[0].normal.normalized * Vector3.Dot(collision.contacts[0].normal.normalized, device.velocity));
+            rb.velocity = -(device.velocity - transform.up.normalized * Vector3.Dot(transform.up.normalized, device.velocity));
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<LeftHand>() != null)
+        {
+            other.GetComponent<LeftHand>().isStampReady = false;
         }
     }
 }
