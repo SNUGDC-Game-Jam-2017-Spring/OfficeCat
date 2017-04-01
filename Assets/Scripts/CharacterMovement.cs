@@ -36,19 +36,22 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	public void LookAround()
 	{
-		var currntRotation = head.localRotation.eulerAngles.y;
+		var rot = head.localRotation.eulerAngles;
+		var currntRotation = rot.y;
 		if(Mathf.Abs(currntRotation) > maxHeadRotation)
 		{
 			LookAroundDirection *= -1;
 		}
 		currntRotation += headRotationSpeed * Time.deltaTime * LookAroundDirection;
+		rot.y = currntRotation;
+		head.localRotation = Quaternion.Euler(rot);
 	}
 	public void TurnToNextWaypoint()
 	{
 		var headRotation = head.rotation;
 		transform.LookAt(currentTarget.position);
 		head.rotation = headRotation;
-		head.DOLocalRotate(Vector3.zero,1f);
+		head.DOLocalRotate(Vector3.zero,0.4f);
 	}
 	/// <summary>
 	/// Update is called every frame, if the MonoBehaviour is enabled.
@@ -64,11 +67,11 @@ public class CharacterMovement : MonoBehaviour {
 		if(distance.magnitude < targetDistance)
 		{
 			var way = currentTarget.GetComponent<WayPoint>();
+			currentTarget = wayParent.GetNextTarget();
 			if(way != null)
 			{
 				way.Arrive(anim);
 			}
-			currentTarget = wayParent.GetNextTarget();
 		}
 	}
 }
