@@ -37,9 +37,16 @@ public class LeftHand : MonoBehaviour {
             if(isStampReady && isPassPaperStackAir)
             {
                 Transform newPaper = Instantiate(paper) as Transform;
+                GameObject newPawMark = Instantiate(pawMark);
+                newPawMark.transform.parent = newPaper;
+                newPawMark.transform.position = markPosition.position;
+                newPawMark.transform.localPosition = new Vector3(newPawMark.transform.localPosition.x, 0, newPawMark.transform.localPosition.z);
+                newPawMark.transform.rotation = markPosition.rotation;
+                newPawMark.GetComponent<Decal>().LimitTo = newPaper.gameObject;
                 Debug.Log("paperInstatiated");
                 newPaper.position = new Vector3(other.transform.position.x, other.transform.position.y + paperStack.localScale.y* 0.01f + 0.01f, other.transform.position.z);
                 paperStack.localScale = new Vector3(1, paperStack.localScale.y - 1, 1);
+                Level.currentWork++;
                 if(paperStack.localScale.y <1)
                 {
                     Destroy(paperStack.gameObject);
