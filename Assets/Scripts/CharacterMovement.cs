@@ -59,7 +59,8 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	public void CheckPlayerWorking()
 	{
-		if(!GameController.instance.isWorking)
+		if(!GameController.instance.isWorking 
+		&& GameController.instance.paperStackResizable.gameObject.activeInHierarchy)
 		{
 			SetAngry();
 			Debug.Log("PlayerIsNotWorking!");
