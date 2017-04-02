@@ -76,7 +76,9 @@ public class CharacterMovement : MonoBehaviour {
 	public void LookAtPlayer()
 	{
 		var vrCam = FindObjectOfType<SteamVR_Camera>();
-		transform.LookAt((Vector2)vrCam.head.position);
+		var playerPosition = vrCam.head.position;
+		playerPosition.y = 0;
+		transform.LookAt(playerPosition);
 		head.localRotation = Quaternion.identity;
 	}
 	/// <summary>
