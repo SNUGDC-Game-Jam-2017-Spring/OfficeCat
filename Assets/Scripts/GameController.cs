@@ -52,6 +52,7 @@ public class GameController : MonoBehaviour {
     public Text time;
     public Canvas workDoneCanvas;
     public Canvas gameOverCanvas;
+    public Transform paperStackAir;
 
     public int currentWork = 0;
     public int currentWorkToDo = 15;
@@ -129,6 +130,7 @@ public class GameController : MonoBehaviour {
             paperStackResizable.gameObject.SetActive(true);
             currentWorkToDo += 5;
             paperStackResizable.localScale = new Vector3(1, currentWorkToDo, 1);
+            paperStackAir.localPosition = new Vector3(0, paperStackAir.localPosition.y + currentWorkToDo * 0.01f, 0);
             totalWorkToDo += currentWorkToDo;
         }
     }
