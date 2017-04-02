@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public enum BossActionType
 {
-	Forward, LookAround, TurnToNextPosition, LookForward,
+	Forward, LookAround, TurnToNextPosition, LookForward, CheckPlayerWorking
 }
 [System.SerializableAttribute]
 public struct BossAction
