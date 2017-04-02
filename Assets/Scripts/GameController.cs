@@ -107,7 +107,7 @@ public class GameController : MonoBehaviour {
         }
         if(currentTime <= 120 && currentTime >= 110 && !completed)
         {
-            if (currentWork == currentWorkToDo)
+            if (currentWork == totalWorkToDo)
             {
                 workDoneCanvas.gameObject.SetActive(true);
                 completed = true;
