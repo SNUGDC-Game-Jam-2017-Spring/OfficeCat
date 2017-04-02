@@ -25,7 +25,7 @@ public class SteamVR_Camera : MonoBehaviour
 	public Transform ears { get { return _ears; } }
 
     bool eyeContacted { get { return  eyeContactTime > 3f; } }
-    float eyeContactTime = 0f;
+    float eyeContactTime = 3f;
 
 	public Ray GetRay()
 	{
