@@ -132,6 +132,7 @@ public class GameController : MonoBehaviour {
             paperStackResizable.localScale = new Vector3(1, currentWorkToDo, 1);
             paperStackAir.localPosition = new Vector3(0, paperStackAir.localPosition.y + currentWorkToDo * 0.01f, 0);
             totalWorkToDo += currentWorkToDo;
+            playingTimeCount = 0f;
         }
     }
 }
