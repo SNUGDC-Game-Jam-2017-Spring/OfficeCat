@@ -75,37 +75,46 @@ public class GameController : MonoBehaviour {
         get { return playingTimeCount < 3; } }
     float playingTimeCount = 0f;
     int workDone;
+    bool completed = false;
 
 	void Start ()
     {
         paperStackResizable.localScale = new Vector3(1, Level.currentWorkToDo, 1);
         main.text = "서류들에 앞발 도장을 찍자!\n"+ Level.currentWork + "/" + Level.currentWorkToDo;
-        workDone = Level.currentWork;
+        workDone = currentWork;
     }
 	
 
 	void Update ()
     {
         currentTime += Time.deltaTime;
-        time.text = ""+ Level.currentTime;
+        time.text = ""+ currentTime;
         main.text = "서류들에 앞발 도장을 찍자!\n" + Level.currentWork + "/" + Level.currentWorkToDo;
-        if (workDone != Level.currentWork)
+        if (workDone != currentWork)
         {
             playingTimeCount = 0f;
-            workDone = Level.currentWork;
+            workDone = currentWork;
         }
         else
         {
             playingTimeCount += Time.deltaTime;
         }
-        if(Level.currentWork == Level.currentWorkToDo && Level.currentTime >= 120)
+        if(currentTime <= 120 && currentTime >= 110 && !completed)
         {
-            workDoneCanvas.gameObject.SetActive(true);
-            currentTime -= 120;
+            if (currentWork == currentWorkToDo)
+            {
+                workDoneCanvas.gameObject.SetActive(true);
+                completed = true;
+            }
         }
-        else if(Level.WarningCount == 3)
+        else if(currentTime >= 120f)
+        {
+            currentTime -= 120f;
+        }
+        if(WarningCount == 4 && !completed)
         {
             gameOverCanvas.gameObject.SetActive(true);
+            completed = true;
         }
     }
     void addWarningCount()
