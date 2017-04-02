@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public enum BossActionType
 {
-	Forward, LookAround, TurnToNextPosition, LookForward, CheckPlayerWorking
+	Forward, LookAround, TurnToNextPosition, LookForward, CheckPlayerWorking, AddAngryPoint, SetNotAngry
 }
 [System.SerializableAttribute]
 public struct BossAction
@@ -18,7 +18,7 @@ public class BossAnimBehaviour : StateMachineBehaviour {
 	public BossAction[] exit;
 	public CharacterMovement movement;
 
-	void PlayAction(BossAction action)
+	void PlayAction(BossAction action, Animator anim)
 	{
 		switch(action.actionType)
 		{
@@ -34,6 +34,15 @@ public class BossAnimBehaviour : StateMachineBehaviour {
 			case BossActionType.LookForward:
 			movement.head.DOLocalRotate(Vector3.zero,1f);
 			break;
+			case BossActionType.CheckPlayerWorking:
+			movement.CheckPlayerWorking();
+			break;
+			case BossActionType.AddAngryPoint:
+			Level.WarningCount++;
+			break;
+			case BossActionType.SetNotAngry:
+			anim.SetBool("angry",false);
+			break;
 		}
 	}
 
@@ -41,7 +50,7 @@ public class BossAnimBehaviour : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		foreach(var action in enter)
 		{
-			PlayAction(action);
+			PlayAction(action, animator);
 		}
 	}
 
@@ -49,7 +58,7 @@ public class BossAnimBehaviour : StateMachineBehaviour {
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		foreach(var action in update)
 		{
-			PlayAction(action);
+			PlayAction(action, animator);
 		}
 	}
 
@@ -57,7 +66,7 @@ public class BossAnimBehaviour : StateMachineBehaviour {
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		foreach(var action in exit)
 		{
-			PlayAction(action);
+			PlayAction(action, animator);
 		}
 	}
 
