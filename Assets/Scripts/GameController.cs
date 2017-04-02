@@ -35,7 +35,6 @@ public class GameController : MonoBehaviour {
         if (currentWork != Level.currentWork)
         {
             playingTimeCount = 0f;
-            Debug.Log("Working");
             currentWork = Level.currentWork;
         }
         else
