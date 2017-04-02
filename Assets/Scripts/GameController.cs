@@ -89,7 +89,6 @@ public class GameController : MonoBehaviour {
 
 	void Update ()
     {
-        Debug.Log("totalWorkToDo");
         currentTime += Time.deltaTime;
         time.text = ""+ currentTime;
         main.text = "서류들에 앞발 도장을 찍자!\n" + currentWork + "/" + totalWorkToDo;
