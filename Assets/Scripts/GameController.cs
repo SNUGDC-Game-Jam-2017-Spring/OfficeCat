@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VR;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.ImageEffects;
+using DG.Tweening;
 
 public static class Level
 {
@@ -53,6 +55,7 @@ public class GameController : MonoBehaviour {
     public Canvas workDoneCanvas;
     public Canvas gameOverCanvas;
     public Transform paperStackAir;
+    public Camera mainCamera;
 
     public int currentWork = 0;
     public int currentWorkToDo = 15;
@@ -143,7 +146,10 @@ public class GameController : MonoBehaviour {
     }
     IEnumerator LoadNewScene()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
+        var tone = mainCamera.GetComponent<Tonemapping>();
+        DOTween.To(() => tone.exposureAdjustment, t => tone.exposureAdjustment = t, 0.005f, 1f);
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(0);
     }
 }
