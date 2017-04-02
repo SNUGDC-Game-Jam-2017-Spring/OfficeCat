@@ -78,6 +78,7 @@ public class GameController : MonoBehaviour {
     float playingTimeCount = 0f;
     int workDone;
     bool completed = false;
+    bool loadScene = false;
 
 	void Start ()
     {
@@ -118,6 +119,11 @@ public class GameController : MonoBehaviour {
             gameOverCanvas.gameObject.SetActive(true);
             completed = true;
         }
+        if(completed && !loadScene)
+        {
+            StartCoroutine(LoadNewScene());
+            loadScene = true;
+        }
     }
     void addWarningCount()
     {
@@ -134,5 +140,10 @@ public class GameController : MonoBehaviour {
             totalWorkToDo += currentWorkToDo;
             playingTimeCount = 0f;
         }
+    }
+    IEnumerator LoadNewScene()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(0);
     }
 }
