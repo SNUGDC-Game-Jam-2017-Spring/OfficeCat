@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour {
 	public float maxHeadRotation = 60f;
 	public float headRotationSpeed = 90f;
 	public Transform currentTarget;
+	public bool testDrive = false;
 	Animator anim;
 	Rigidbody body;
 	WayPointParent wayParent;
@@ -60,7 +61,8 @@ public class CharacterMovement : MonoBehaviour {
 	public void CheckPlayerWorking()
 	{
 		if(!GameController.instance.isWorking 
-		&& GameController.instance.paperStackResizable.gameObject.activeInHierarchy)
+		&& GameController.instance.paperStackResizable.gameObject.activeInHierarchy
+		&& !testDrive)
 		{
 			SetAngry();
 			Debug.Log("PlayerIsNotWorking!");
@@ -94,6 +96,7 @@ public class CharacterMovement : MonoBehaviour {
 		var distance = currentTarget.position - transform.position;
 		if(distance.magnitude < targetDistance)
 		{
+			body.velocity = Vector3.zero;
 			var way = currentTarget.GetComponent<WayPoint>();
 			currentTarget = wayParent.GetNextTarget();
 			if(way != null)
