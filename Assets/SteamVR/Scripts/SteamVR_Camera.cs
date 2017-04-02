@@ -24,14 +24,33 @@ public class SteamVR_Camera : MonoBehaviour
 	private Transform _ears;
 	public Transform ears { get { return _ears; } }
 
+    bool eyeContacted { get { return  eyeContactTime > 3f; } }
+    float eyeContactTime = 0f;
+
 	public Ray GetRay()
 	{
-		return new Ray(_head.position, _head.forward);
+        return new Ray(_head.position, _head.forward);
 	}
 
 	public bool wireframe = false;
 
-	static public float sceneResolutionScale
+    private void Update()
+    {
+        RaycastHit hit;
+        eyeContactTime += Time.deltaTime;
+        if (Physics.Raycast(GetRay().origin,GetRay().direction, out hit, 10f))
+        {
+            if(hit.collider.gameObject.tag == "bossEye" && eyeContacted)
+            {
+                Level.WarningCount++;
+                Debug.Log("EyeContact");
+                eyeContactTime = 0f;
+            }
+            Debug.DrawRay(GetRay().origin, GetRay().direction,Color.red);
+        }
+    }
+
+    static public float sceneResolutionScale
 	{
 		get { return UnityEngine.VR.VRSettings.renderScale; }
 		set { UnityEngine.VR.VRSettings.renderScale = value; }

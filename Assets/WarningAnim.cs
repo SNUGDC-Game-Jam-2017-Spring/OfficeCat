@@ -14,7 +14,7 @@ public class WarningAnim : MonoBehaviour {
     {
         if(Level.WarningCount != currentWarningCount)
         {
-            if(currentWarningCount == warningNum)
+            if(Level.WarningCount == warningNum)
             {
                 WarningAnimation();
             }
