@@ -73,6 +73,12 @@ public class CharacterMovement : MonoBehaviour {
 		Debug.Log("Boss View Degree : "+deg);
 		return deg < 90;
 	}
+	public void LookAtPlayer()
+	{
+		var vrCam = FindObjectOfType<SteamVR_Camera>();
+		transform.LookAt((Vector2)vrCam.head.position);
+		head.localRotation = Quaternion.identity;
+	}
 	/// <summary>
 	/// Update is called every frame, if the MonoBehaviour is enabled.
 	/// </summary>
