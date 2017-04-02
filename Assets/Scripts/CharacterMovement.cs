@@ -64,6 +64,7 @@ public class CharacterMovement : MonoBehaviour {
 			SetAngry();
 			Debug.Log("PlayerIsNotWorking!");
 		}
+		GameController.instance.AddWork();
 	}
 	public bool isPositionInBossView(Vector3 target)
 	{
