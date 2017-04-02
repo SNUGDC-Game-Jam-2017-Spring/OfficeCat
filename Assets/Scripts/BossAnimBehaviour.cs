@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public enum BossActionType
 {
-	Forward, LookAround, TurnToNextPosition, LookForward, CheckPlayerWorking, AddAngryPoint, SetNotAngry
+	Forward, LookAround, TurnToNextPosition, LookForward, 
+	CheckPlayerWorking, AddAngryPoint, SetNotAngry, LookAtPlayer
 }
 [System.SerializableAttribute]
 public struct BossAction
@@ -42,6 +43,9 @@ public class BossAnimBehaviour : StateMachineBehaviour {
 			break;
 			case BossActionType.SetNotAngry:
 			anim.SetBool("angry",false);
+			break;
+			case BossActionType.LookAtPlayer:
+			movement.LookAtPlayer();
 			break;
 		}
 	}
