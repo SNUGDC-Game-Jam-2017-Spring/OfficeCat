@@ -44,10 +44,10 @@ public class SteamVR_Camera : MonoBehaviour
             {
 				var eyeObject = hit.collider.gameObject;
 				var bossChar = eyeObject.GetComponentInParent<CharacterMovement>();
-				if(!bossChar.isPositionInBossView(_head.position))
-				{
-					return;
-				}
+				// if(!bossChar.isPositionInBossView(_head.position))
+				// {
+				// 	return;
+				// }
 				bossChar.SetAngry();
                 Debug.Log("EyeContact");
                 eyeContactTime = 0f;
