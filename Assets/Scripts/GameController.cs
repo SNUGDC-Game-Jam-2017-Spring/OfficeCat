@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour {
 
     public int currentWork = 0;
     public int currentWorkToDo = 15;
+    public int totalWorkToDo = 15;
     public int WarningCount = 0;
     public float currentTime = 0;
 
@@ -80,7 +81,7 @@ public class GameController : MonoBehaviour {
 	void Start ()
     {
         paperStackResizable.localScale = new Vector3(1, Level.currentWorkToDo, 1);
-        main.text = "서류들에 앞발 도장을 찍자!\n"+ Level.currentWork + "/" + Level.currentWorkToDo;
+        main.text = "서류들에 앞발 도장을 찍자!\n"+ currentWork + "/" + totalWorkToDo;
         workDone = currentWork;
     }
 	
@@ -89,7 +90,7 @@ public class GameController : MonoBehaviour {
     {
         currentTime += Time.deltaTime;
         time.text = ""+ currentTime;
-        main.text = "서류들에 앞발 도장을 찍자!\n" + Level.currentWork + "/" + Level.currentWorkToDo;
+        main.text = "서류들에 앞발 도장을 찍자!\n" + currentWork + "/" + totalWorkToDo;
         if (workDone != currentWork)
         {
             playingTimeCount = 0f;
@@ -120,5 +121,15 @@ public class GameController : MonoBehaviour {
     void addWarningCount()
     {
         WarningCount++;
+    }
+    public void AddWork()
+    {
+        if(!completed && paperStackResizable.gameObject.activeInHierarchy == false)
+        {
+            paperStackResizable.gameObject.SetActive(true);
+            currentWorkToDo += 5;
+            paperStackResizable.localScale = new Vector3(1, currentWorkToDo, 1);
+            totalWorkToDo += currentWorkToDo;
+        }
     }
 }

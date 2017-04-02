@@ -49,7 +49,7 @@ public class LeftHand : MonoBehaviour {
                 Level.currentWork++;
                 if(paperStack.localScale.y <1)
                 {
-                    Destroy(paperStack.gameObject);
+                    paperStack.gameObject.SetActive(false);
                 }
                 isStampReady = false;
                 isPassPaperStackAir = false;
