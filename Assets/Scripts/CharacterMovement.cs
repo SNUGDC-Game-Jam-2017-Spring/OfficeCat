@@ -53,6 +53,25 @@ public class CharacterMovement : MonoBehaviour {
 		head.rotation = headRotation;
 		head.DOLocalRotate(Vector3.zero,0.4f);
 	}
+	public void SetAngry()
+	{
+		anim.SetTrigger("angry");
+	}
+	public void CheckPlayerWorking()
+	{
+		if(!GameController.instance.isWorking)
+		{
+			SetAngry();
+			Debug.Log("PlayerIsNotWorking!");
+		}
+		GameController.instance.AddWork();
+	}
+	public bool isPositionInBossView(Vector3 target)
+	{
+		var deg = Vector3.Angle(head.transform.forward, target - head.transform.position);
+		Debug.Log("Boss View Degree : "+deg);
+		return deg < 90;
+	}
 	/// <summary>
 	/// Update is called every frame, if the MonoBehaviour is enabled.
 	/// </summary>

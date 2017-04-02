@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    bool isWorking {
+    public bool isWorking {
         get { return playingTimeCount < 3; } }
     float playingTimeCount = 0f;
     int workDone;
